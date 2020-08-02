@@ -1,0 +1,26 @@
+service: notifier-linkedin-api
+
+provider:
+    name: aws
+    region: eu-west-3
+    runtime: provided
+    environment:
+        APP_ENV: prod
+        LINKEDIN_DSN:
+
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    website:
+        handler: public/index.php
+        layers:
+            - ${bref:layer.php-73-fpm}
+        timeout: 28
+        events:
+            - http: 'POST /contents'
+
+package:
+    exclude:
+        - 'tests/**'
