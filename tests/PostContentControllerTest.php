@@ -35,7 +35,7 @@ class PostContentControllerTest extends WebTestCase
 
     public function testAPostRequestWithAMessageInBodyShouldReturnA201()
     {
-        $request = new Request([], ['message' => 'Hello World']);
+        $request = new Request([],[],[],[],[],[], json_encode(['message' => 'Hello World']));
 
         $notifier = new class implements NotifierInterface {
             public function send(Notification $notification, Recipient ...$recipients): void
